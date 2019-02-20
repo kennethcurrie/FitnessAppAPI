@@ -1,7 +1,5 @@
 rollback;
 begin transaction;
-
-set schema 'fitness-app';
 /*Begin Dropping Tables*/
 	/*Level 2 Tables*/
 		drop table if exists exerciselog;
@@ -57,8 +55,7 @@ set schema 'fitness-app';
 			note              text,
 			occourred         date    not null,
 			constraint pk_exerciselog primary key (exerciselogid),
-			constraint fk_exercise foreign key (exerciseid) references exercise (exerciseid),
-			constraint fk_user foreign key (userid) references account (userid)
+			constraint fk_exercise foreign key (exerciseid) references exercise (exerciseid)
 		);
 		create table exercisesubscription(
 			exerciseid        int     not null,
