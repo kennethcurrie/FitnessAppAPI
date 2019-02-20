@@ -58,11 +58,11 @@ begin transaction;
 			constraint fk_exercise foreign key (exerciseid) references exercise (exerciseid)
 		);
 		create table exercisesubscription(
-			exercisesubscriptionid serial  not null,
 			exerciseid        int     not null,
 			userid            int     not null,
-			constraint pk_exercisesubscription primary key (exercisesubscriptionid),
-			constraint fk_exercisesub foreign key (exerciseid) references exercise (exerciseid)
+			constraint pk_exercisesubscription primary key (exerciseid, userid),
+			constraint fk_exercisesub foreign key (exerciseid) references exercise (exerciseid),
+			constraint fk_usersub foreign key (userid) references account (userid)
 		);
 	
 /*End Creating Tables*/
@@ -103,37 +103,37 @@ begin transaction;
 			insert into account (username, "password", salt, fullname, email, pictureurl, privateprofile, typeid) values ('test5',      md5('password'||md5('test5')),      md5('test5'),      'Ed Test',            'test.5@fitnessapp.com',  null, true,  2 );
 	/*Level 2 Tables*/
 		/*accountsubscription*/
-			insert into accountsubscription (subscriberid, subscribeeid) values (1, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (1, 3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (3, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (4, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (5, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (6, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (8, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (9, 2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (9, 3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (10,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (11,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (12,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (13,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (14,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (15,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (16,2);
-			insert into accountsubscription (subscriberid, subscribeeid) values (11,3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (12,3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (13,3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (14,3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (15,3);
-			insert into accountsubscription (subscriberid, subscribeeid) values (11,4);
-			insert into accountsubscription (subscriberid, subscribeeid) values (12,4);
-			insert into accountsubscription (subscriberid, subscribeeid) values (13,4);
-			insert into accountsubscription (subscriberid, subscribeeid) values (14,4);
-			insert into accountsubscription (subscriberid, subscribeeid) values (11,5);
-			insert into accountsubscription (subscriberid, subscribeeid) values (12,5);
-			insert into accountsubscription (subscriberid, subscribeeid) values (13,5);
-			insert into accountsubscription (subscriberid, subscribeeid) values (11,6);
-			insert into accountsubscription (subscriberid, subscribeeid) values (12,6);
-			insert into accountsubscription (subscriberid, subscribeeid) values (11,7);
+			insert into accountsubscription values (1, 2);
+			insert into accountsubscription values (1, 3);
+			insert into accountsubscription values (3, 2);
+			insert into accountsubscription values (4, 2);
+			insert into accountsubscription values (5, 2);
+			insert into accountsubscription values (6, 2);
+			insert into accountsubscription values (8, 2);
+			insert into accountsubscription values (9, 2);
+			insert into accountsubscription values (9, 3);
+			insert into accountsubscription values (10,2);
+			insert into accountsubscription values (11,2);
+			insert into accountsubscription values (12,2);
+			insert into accountsubscription values (13,2);
+			insert into accountsubscription values (14,2);
+			insert into accountsubscription values (15,2);
+			insert into accountsubscription values (16,2);
+			insert into accountsubscription values (11,3);
+			insert into accountsubscription values (12,3);
+			insert into accountsubscription values (13,3);
+			insert into accountsubscription values (14,3);
+			insert into accountsubscription values (15,3);
+			insert into accountsubscription values (11,4);
+			insert into accountsubscription values (12,4);
+			insert into accountsubscription values (13,4);
+			insert into accountsubscription values (14,4);
+			insert into accountsubscription values (11,5);
+			insert into accountsubscription values (12,5);
+			insert into accountsubscription values (13,5);
+			insert into accountsubscription values (11,6);
+			insert into accountsubscription values (12,6);
+			insert into accountsubscription values (11,7);
 		/*exerciselog*/
 			/*the admin*/
 				insert into exerciselog (exerciseid, userid, units, note, occourred) values (1, 1,  2.5,  null, '2019-02-01' );
@@ -756,44 +756,44 @@ begin transaction;
 				insert into exerciselog (exerciseid, userid, units, note, occourred) values (9, 11, 200,  null, '2019-02-27' );
 				insert into exerciselog (exerciseid, userid, units, note, occourred) values (9, 11, 200,  null, '2019-02-28' );
 		/*accountsubscription*/
-			insert into exercisesubscription (exerciseid, userid) values (1,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (2,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (3,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (4,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (5,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (6,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (7,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (8,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (9,  1  );
-			insert into exercisesubscription (exerciseid, userid) values (10, 1  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  2  );
-			insert into exercisesubscription (exerciseid, userid) values (7,  2  );
-			insert into exercisesubscription (exerciseid, userid) values (8,  2  );
-			insert into exercisesubscription (exerciseid, userid) values (9,  2  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  3  );
-			insert into exercisesubscription (exerciseid, userid) values (4,  3  );
-			insert into exercisesubscription (exerciseid, userid) values (5,  3  );
-			insert into exercisesubscription (exerciseid, userid) values (6,  3  );
-			insert into exercisesubscription (exerciseid, userid) values (8,  3  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  4  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  5  );
-			insert into exercisesubscription (exerciseid, userid) values (5,  5  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  6  );
-			insert into exercisesubscription (exerciseid, userid) values (4,  6  );
-			insert into exercisesubscription (exerciseid, userid) values (5,  6  );
-			insert into exercisesubscription (exerciseid, userid) values (2,  7  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  8  );
-			insert into exercisesubscription (exerciseid, userid) values (1,  9  );
-			insert into exercisesubscription (exerciseid, userid) values (4,  9  );
-			insert into exercisesubscription (exerciseid, userid) values (5,  9  );
-			insert into exercisesubscription (exerciseid, userid) values (6,  9  );
-			insert into exercisesubscription (exerciseid, userid) values (8,  9  );
-			insert into exercisesubscription (exerciseid, userid) values (9,  10 );
-			insert into exercisesubscription (exerciseid, userid) values (9,  11 );
-			insert into exercisesubscription (exerciseid, userid) values (10, 12 );
-			insert into exercisesubscription (exerciseid, userid) values (10, 13 );
-			insert into exercisesubscription (exerciseid, userid) values (10, 14 );
-			insert into exercisesubscription (exerciseid, userid) values (10, 15 );
-			insert into exercisesubscription (exerciseid, userid) values (10, 16 );
+			insert into exercisesubscription values (1,  1  );
+			insert into exercisesubscription values (2,  1  );
+			insert into exercisesubscription values (3,  1  );
+			insert into exercisesubscription values (4,  1  );
+			insert into exercisesubscription values (5,  1  );
+			insert into exercisesubscription values (6,  1  );
+			insert into exercisesubscription values (7,  1  );
+			insert into exercisesubscription values (8,  1  );
+			insert into exercisesubscription values (9,  1  );
+			insert into exercisesubscription values (10, 1  );
+			insert into exercisesubscription values (1,  2  );
+			insert into exercisesubscription values (7,  2  );
+			insert into exercisesubscription values (8,  2  );
+			insert into exercisesubscription values (9,  2  );
+			insert into exercisesubscription values (1,  3  );
+			insert into exercisesubscription values (4,  3  );
+			insert into exercisesubscription values (5,  3  );
+			insert into exercisesubscription values (6,  3  );
+			insert into exercisesubscription values (8,  3  );
+			insert into exercisesubscription values (1,  4  );
+			insert into exercisesubscription values (1,  5  );
+			insert into exercisesubscription values (5,  5  );
+			insert into exercisesubscription values (1,  6  );
+			insert into exercisesubscription values (4,  6  );
+			insert into exercisesubscription values (5,  6  );
+			insert into exercisesubscription values (2,  7  );
+			insert into exercisesubscription values (1,  8  );
+			insert into exercisesubscription values (1,  9  );
+			insert into exercisesubscription values (4,  9  );
+			insert into exercisesubscription values (5,  9  );
+			insert into exercisesubscription values (6,  9  );
+			insert into exercisesubscription values (8,  9  );
+			insert into exercisesubscription values (9,  10 );
+			insert into exercisesubscription values (9,  11 );
+			insert into exercisesubscription values (10, 12 );
+			insert into exercisesubscription values (10, 13 );
+			insert into exercisesubscription values (10, 14 );
+			insert into exercisesubscription values (10, 15 );
+			insert into exercisesubscription values (10, 16 );
 /*End Filling Tables*/
 commit;
