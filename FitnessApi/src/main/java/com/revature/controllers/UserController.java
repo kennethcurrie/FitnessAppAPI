@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,29 +17,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.AppUser;
+import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("users")
 public class UserController {
 
 	List<AppUser> users = new ArrayList<>();
-
 	{
-		users.add(new AppUser(1, "Kyle", "password", "associate"));
-		users.add(new AppUser(2, "Alec", "password", "associate"));
-		users.add(new AppUser(3, "Blake", "password", "trainer"));
-		users.add(new AppUser(4, "Steve", "password", "manager"));
-		users.add(new AppUser(5, "Nick", "password", "trainer"));
 	}
+	
+	@Autowired
+	UserService userService;
 
 	@GetMapping
 	public List<AppUser> findAll() {
-		return users;
+		
+//		return new ArrayList<AppUser>();
+		return userService.findAll();
 	}
 
 	@GetMapping("role/{role}")
 	public List<AppUser> findByRole(@PathVariable String role) {
-		return users.stream().filter(user -> user.getRole().equals(role)).collect(Collectors.toList());
+//		return users.stream().filter(user -> user.getAccountType().equals(role)).collect(Collectors.toList());
+		return null;
 	}
 
 	@GetMapping("{id}")
