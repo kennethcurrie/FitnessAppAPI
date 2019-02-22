@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class BearsApiApplication {
+public class FitnessApiApplication {
 
 	@Bean
 	public Docket api() {
@@ -21,7 +21,7 @@ public class BearsApiApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(BearsApiApplication.class, args);
+		SpringApplication.run(FitnessApiApplication.class, args);
 	}
 
 }

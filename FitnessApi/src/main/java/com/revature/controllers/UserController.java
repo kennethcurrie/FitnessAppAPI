@@ -37,21 +37,26 @@ public class UserController {
 		return userService.findAll();
 	}
 
-	@GetMapping("role/{role}")
-	public List<AppUser> findByRole(@PathVariable String role) {
-//		return users.stream().filter(user -> user.getAccountType().equals(role)).collect(Collectors.toList());
-		return null;
-	}
-
 	@GetMapping("{id}")
 	public ResponseEntity<AppUser> findById(@PathVariable int id) {
-		for (AppUser user : users) {
+		for (AppUser user : findAll()) {
 			if (user.getId() == id) {
+				return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
 			}
 		}
 		return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
-		
 	}
+	
+	@GetMapping("username/{username}")
+	public ResponseEntity<AppUser> findByUserName(@PathVariable String username) {
+		for (AppUser user : findAll()) {
+			if (user.getUserName().equals(username) ) {
+				return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
+			}
+		}
+		return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
+	}
+
 	
 	@PostMapping
 	@ResponseStatus(code=HttpStatus.CREATED)
