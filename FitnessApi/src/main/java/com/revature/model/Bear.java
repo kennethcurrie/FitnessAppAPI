@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "bears")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@JsonFilter("depth_3")
+@JsonFilter("depth_4")
 public class Bear {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

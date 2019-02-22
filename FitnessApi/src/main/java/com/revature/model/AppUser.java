@@ -17,11 +17,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Table(name = "account")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@JsonFilter("depth_3")
+@JsonFilter("depth_4")
 public class AppUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +33,11 @@ public class AppUser {
 	@Column(name = "username")
 	private String userName;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "password")
 	private String password;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "salt")
 	private String salt;
 
