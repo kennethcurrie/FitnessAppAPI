@@ -14,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -48,7 +47,7 @@ public class AppUser {
 	private String pictureUrl;
 
 	@Column(name = "privateprofile")
-	private String isPrivate;
+	private boolean isPrivate;
 	
 	//@Transient
 	@ManyToOne
@@ -61,7 +60,6 @@ public class AppUser {
 
 	public AppUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -120,28 +118,8 @@ public class AppUser {
 		this.pictureUrl = pictureUrl;
 	}
 
-	public String getIsPrivate() {
+	public boolean getIsPrivate() {
 		return isPrivate;
-	}
-
-	public void setIsPrivate(String isPrivate) {
-		this.isPrivate = isPrivate;
-	}
-
-	public AccountType getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
-	}
-
-	public Set<AppUser> getFollowedUsers() {
-		return followedUsers;
-	}
-
-	public void setFollowedUsers(Set<AppUser> followedUsers) {
-		this.followedUsers = followedUsers;
 	}
 
 	@Override
@@ -153,7 +131,7 @@ public class AppUser {
 		result = prime * result + ((followedUsers == null) ? 0 : followedUsers.hashCode());
 		result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((isPrivate == null) ? 0 : isPrivate.hashCode());
+		result = prime * result + (isPrivate ? 1231 : 1237);
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((pictureUrl == null) ? 0 : pictureUrl.hashCode());
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
@@ -192,10 +170,7 @@ public class AppUser {
 			return false;
 		if (id != other.id)
 			return false;
-		if (isPrivate == null) {
-			if (other.isPrivate != null)
-				return false;
-		} else if (!isPrivate.equals(other.isPrivate))
+		if (isPrivate != other.isPrivate)
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -218,6 +193,26 @@ public class AppUser {
 		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
+	}
+
+	public void setIsPrivate(boolean isPrivate) {
+		this.isPrivate = isPrivate;
+	}
+
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+
+	public Set<AppUser> getFollowedUsers() {
+		return followedUsers;
+	}
+
+	public void setFollowedUsers(Set<AppUser> followedUsers) {
+		this.followedUsers = followedUsers;
 	}
 
 	@Override
