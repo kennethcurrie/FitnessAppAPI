@@ -16,14 +16,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AppUser save(AppUser user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.save(user);
 	}
 
 	@Override
 	public AppUser update(AppUser user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.save(user);
 	}
 
 	@Override

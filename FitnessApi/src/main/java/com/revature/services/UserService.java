@@ -1,6 +1,6 @@
 package com.revature.services;
 
-
+//this is the service layer
 import java.util.List;
 
 import com.revature.model.AppUser;
