@@ -31,7 +31,7 @@ public class AppUser {
 	private int id;
 
 	@Column(name = "username")
-	private String userName;
+	private String username;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "password")
@@ -61,7 +61,11 @@ public class AppUser {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "accountsubscription", joinColumns = @JoinColumn(name = "subscriberid"), inverseJoinColumns = @JoinColumn(name = "subscribeeid"))
 	private Set<AppUser> followedUsers = new HashSet<>();
-
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "exercisesubscription", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "exerciseid"))
+	private Set<Exercise> followedExercises = new HashSet<>();
+	
 	public AppUser() {
 		super();
 	}
@@ -75,11 +79,11 @@ public class AppUser {
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 
 	public String getPassword() {
@@ -130,16 +134,8 @@ public class AppUser {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((followedUsers == null) ? 0 : followedUsers.hashCode());
-		result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
 		result = prime * result + id;
-		result = prime * result + (isPrivate ? 1231 : 1237);
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((pictureUrl == null) ? 0 : pictureUrl.hashCode());
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -152,49 +148,12 @@ public class AppUser {
 		if (getClass() != obj.getClass())
 			return false;
 		AppUser other = (AppUser) obj;
-		if (accountType == null) {
-			if (other.accountType != null)
-				return false;
-		} else if (!accountType.equals(other.accountType))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (followedUsers == null) {
-			if (other.followedUsers != null)
-				return false;
-		} else if (!followedUsers.equals(other.followedUsers))
-			return false;
-		if (fullName == null) {
-			if (other.fullName != null)
-				return false;
-		} else if (!fullName.equals(other.fullName))
-			return false;
 		if (id != other.id)
-			return false;
-		if (isPrivate != other.isPrivate)
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (pictureUrl == null) {
-			if (other.pictureUrl != null)
-				return false;
-		} else if (!pictureUrl.equals(other.pictureUrl))
 			return false;
 		if (salt == null) {
 			if (other.salt != null)
 				return false;
 		} else if (!salt.equals(other.salt))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
@@ -219,16 +178,31 @@ public class AppUser {
 		this.followedUsers = followedUsers;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Set<Exercise> getFollowedExercises() {
+		return followedExercises;
+	}
+
+	public void setFollowedExercises(Set<Exercise> followedExercises) {
+		this.followedExercises = followedExercises;
+	}
+
+	public void setPrivate(boolean isPrivate) {
+		this.isPrivate = isPrivate;
+	}
+
 	@Override
 	public String toString() {
-		return "AppUser [id=" + id + ", userName=" + userName + ", password=" + password + ", salt=" + salt
+		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt
 				+ ", fullName=" + fullName + ", email=" + email + ", pictureUrl=" + pictureUrl + ", isPrivate="
 				+ isPrivate + ", accountType=" + accountType + ", followedUsers=" + followedUsers + "]";
 	}
 		
 }
-
-
-
-
-
