@@ -34,6 +34,9 @@ public class UserServiceImpl implements UserService {
 	public List<AppUser> findAll() {
 		// TODO Auto-generated method stub
 		return userRepo.findAll();
+		
 	}
+	
+	
 
 }

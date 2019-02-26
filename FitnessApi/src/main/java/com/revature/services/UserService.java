@@ -7,7 +7,7 @@ import com.revature.model.AppUser;
 
 public interface UserService {
 
-	AppUser save(AppUser user); // add a bear
+	AppUser save(AppUser user);
 	AppUser update(AppUser user);
 	AppUser delete(AppUser user);
 	
