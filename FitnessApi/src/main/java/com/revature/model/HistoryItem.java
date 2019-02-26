@@ -2,6 +2,11 @@ package com.revature.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilter("depth_4")
+
 public class HistoryItem {
 	private double units;
 	private Date occoured;

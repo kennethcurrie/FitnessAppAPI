@@ -45,6 +45,16 @@ public class ExerciseLogServiceImpl implements ExerciseLogService {
 		return history.findAllByExerciseDescription(name);
 	}
 
+	@Override
+	public List<ExerciseLog> findAllByUserId(int id) {
+		// TODO Auto-generated method stub
+		return history.findAllByUserId(id);
+	}
 
+	@Override
+	public List<ExerciseLog> findAllByUserIdAndExerciseDescription(int id, String name) {
+		// TODO Auto-generated method stub
+		return history.findAllByUserIdAndExerciseDescription(id, name);
+	}
 
 }

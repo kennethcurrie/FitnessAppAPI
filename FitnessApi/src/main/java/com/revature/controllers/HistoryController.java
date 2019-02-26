@@ -26,4 +26,14 @@ public class HistoryController {
 	public List<ExerciseLog> findAllByExerciseDescription(@PathVariable String exercise) {
 		return history.findAllByExerciseDescription(exercise);
 	}
+	
+	@GetMapping("user/{id}")
+	public List<ExerciseLog> findAllByUserId(@PathVariable int id) {
+		return history.findAllByUserId(id);
+	}
+	
+	@GetMapping("user/{id}/exercise/{exercise}")
+	public List<ExerciseLog> findAllByUserIdAndExerciseDescription(@PathVariable int id, @PathVariable String exercise) {
+		return history.findAllByUserIdAndExerciseDescription(id, exercise);
+	}
 }

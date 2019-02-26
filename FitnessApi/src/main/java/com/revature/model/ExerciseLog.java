@@ -13,33 +13,40 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Table(name = "exerciselog")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@JsonFilter("depth_4")
+@JsonFilter("depth_2")
 public class ExerciseLog {
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "exerciselogid")
 	private int id;
-	
-	@ManyToOne
-	@JoinColumn(name = "exerciseid")
-	private Exercise exercise;
-	
-	@ManyToOne
-	@JoinColumn(name = "userid")
-	private AppUser user;
 
 	@Column(name = "units")
 	private double units;
+	
+	@Column(name = "occourred")
+	private Date occourred;
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToOne
+	@JoinColumn(name = "userid")
+	private AppUser user;
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToOne
+	@JoinColumn(name = "exerciseid")
+	private Exercise exercise;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "note")
 	private String note;
 
-	@Column(name = "occourred")
-	private Date occourred;
 
 	public int getId() {
 		return id;
