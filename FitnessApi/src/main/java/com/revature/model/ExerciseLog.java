@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @JsonFilter("depth_4")
-public class Exerciselog {
+public class ExerciseLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "exerciselogid")
@@ -26,7 +26,7 @@ public class Exerciselog {
 	
 	@ManyToOne
 	@JoinColumn(name = "exerciseid")
-	private Exercise exerciseId;
+	private Exercise exercise;
 	
 	@ManyToOne
 	@JoinColumn(name = "userid")
@@ -50,11 +50,11 @@ public class Exerciselog {
 	}
 
 	public Exercise getExerciseId() {
-		return exerciseId;
+		return exercise;
 	}
 
 	public void setExerciseId(Exercise exerciseId) {
-		this.exerciseId = exerciseId;
+		this.exercise = exerciseId;
 	}
 
 	public AppUser getUser() {
@@ -94,7 +94,7 @@ public class Exerciselog {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((exerciseId == null) ? 0 : exerciseId.hashCode());
+		result = prime * result + ((exercise == null) ? 0 : exercise.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + ((occourred == null) ? 0 : occourred.hashCode());
@@ -114,11 +114,11 @@ public class Exerciselog {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Exerciselog other = (Exerciselog) obj;
-		if (exerciseId == null) {
-			if (other.exerciseId != null)
+		ExerciseLog other = (ExerciseLog) obj;
+		if (exercise == null) {
+			if (other.exercise != null)
 				return false;
-		} else if (!exerciseId.equals(other.exerciseId))
+		} else if (!exercise.equals(other.exercise))
 			return false;
 		if (id != other.id)
 			return false;
@@ -145,7 +145,7 @@ public class Exerciselog {
 	
 	@Override
 	public String toString() {
-		return "Exerciselog [id=" + id + ", exerciseId=" + exerciseId + ", user=" + user + ", units=" + units
+		return "Exerciselog [id=" + id + ", exercise=" + exercise + ", user=" + user + ", units=" + units
 				+ ", note=" + note + ", occourred=" + occourred + "]";
 	}
 

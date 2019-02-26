@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Exercise {
 	@Id
 	@Column(name = "exerciseid")
-	private int id;
+	private int exerciseId;
 	
 	@Column(name = "description")
 	private String description;
@@ -20,7 +20,7 @@ public class Exercise {
 	
 	@Override
 	public String toString() {
-		return "Exercise [id=" + id + ", description=" + description + ", unit=" + unit + "]";
+		return "Exercise [id=" + exerciseId + ", description=" + description + ", unit=" + unit + "]";
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class Exercise {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
+		result = prime * result + exerciseId;
 		result = prime * result + ((unit == null) ? 0 : unit.hashCode());
 		return result;
 	}
@@ -47,7 +47,7 @@ public class Exercise {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id != other.id)
+		if (exerciseId != other.exerciseId)
 			return false;
 		if (unit == null) {
 			if (other.unit != null)
@@ -58,11 +58,11 @@ public class Exercise {
 	}
 
 	public int getId() {
-		return id;
+		return exerciseId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.exerciseId = id;
 	}
 
 	public String getDescription() {
