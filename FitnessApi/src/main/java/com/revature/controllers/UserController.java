@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.io.Console;
+
 //this is the router 
 // ** these are the available endpoints
 
@@ -92,11 +94,31 @@ public class UserController {
 	public AppUser save(@RequestBody AppUser user) {
 		
 		System.out.println(user);
+		// by choice we dont want users to be able to update with post
+		// we should probably implement that here
 		AppUser u = userService.save(user);
 		System.out.println(u);
 		return u;
 	}
+	
+	@RequestMapping (value="/{id}/pics", method=RequestMethod.POST,  produces="text/plain", headers = "Accept=application/json")
+	public ResponseEntity<String> uploadUserPhoto(@PathVariable int id, @RequestBody PicURL input) {
+		System.out.println(input);
+		for (AppUser user : findAll()) {
+			if (user.getId() == id ) {
+				user.setPictureUrl(input.picUrl);
+				AppUser result = userService.save(user);
+				if(result != null)
+					return new ResponseEntity<String>(input.picUrl, HttpStatus.ACCEPTED);
+				else
+					return new ResponseEntity<String>(HttpStatus.PRECONDITION_FAILED);
+			}
+		}
+		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+	}
 
+	
+	
 	@RequestMapping (value="/{id}/pics", method=RequestMethod.GET, 
             produces="application/json")
 	public ResponseEntity<List<String>> getUserPicURLs(@PathVariable int id,
@@ -111,4 +133,19 @@ public class UserController {
 	
 	
 
+}
+
+
+
+class PicURL {
+	
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+
+	public String picUrl = "";
 }
