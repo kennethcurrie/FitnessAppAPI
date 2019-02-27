@@ -14,5 +14,7 @@ public interface UserService {
 	AppUser login(Credentials creds);
 	
 	List<AppUser>findAll();
+	AppUser findByUsername(String username);
+	AppUser findById(int id);
 	
 }
