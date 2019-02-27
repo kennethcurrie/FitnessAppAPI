@@ -2,6 +2,7 @@ package com.revature.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.revature.util.MD5;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -78,13 +79,12 @@ public class AppUser {
 		this.id = id;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String pass) {
+		password = MD5.getMD5(pass+salt);
 	}
 
 	public String getSalt() {
@@ -197,5 +197,8 @@ public class AppUser {
 				+ ", fullName=" + fullName + ", email=" + email + ", pictureUrl=" + pictureUrl + ", isPrivate="
 				+ isPrivate + ", accountType=" + accountType + ", followedUsers=" + followedUsers + "]";
 	}
-		
+
+	public boolean checkPassword(String pass) {
+		return password.equals(MD5.getMD5(pass+salt));
+	}
 }

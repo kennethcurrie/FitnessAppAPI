@@ -2,7 +2,6 @@ package com.revature.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.security.MessageDigest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.revature.model.AppUser;
 import com.revature.repos.UserRepo;
 import com.revature.dto.Credentials;
-import com.revature.util.MD5;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,8 +22,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public AppUser update(AppUser user) {
-		return userRepo.save(user);
+	public AppUser update(int id, String username, String password, String fullname, String email, boolean privateprofile) {
+		AppUser user = userRepo.findById(id);
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setFullName(fullname);
+		user.setEmail(email);
+		user.setPrivate(privateprofile);
+//		return userRepo.merge(user);
+		return user;
 	}
 
 	@Override
@@ -59,7 +64,7 @@ public class UserServiceImpl implements UserService {
 		if (u==null) {
 			return null;
 		}else {
-			if(u.getPassword().equals(MD5.getMD5(creds.getPassword()+u.getSalt()))) {
+			if(u.checkPassword(creds.getPassword())) {
 				return u;
 			}else {
 				return null;
