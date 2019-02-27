@@ -42,6 +42,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
+import com.revature.dto.Details;
 import com.revature.model.AppUser;
 import com.revature.services.UserService;
 
@@ -72,6 +74,18 @@ public class UserController {
 	@GetMapping("{id}")
 	public ResponseEntity<AppUser> findById(@PathVariable int id) {
 		AppUser user = userService.findById(id);
+		if(user != null) {
+			return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PatchMapping("update")
+	public ResponseEntity<AppUser> updateUser(@RequestBody Details deets) {
+		System.out.println("username, password, fullname, email, privateprofile");
+		System.out.println(deets.getUsername()+" "+deets.getPassword()+" "+deets.getFullname()+" "+deets.getEmail()+" "+deets.isPrivateprofile());
+		AppUser user = userService.update(deets);
 		if(user != null) {
 			return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
 		} else {
