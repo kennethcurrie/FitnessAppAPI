@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.model.AppUser;
 import com.revature.repos.UserRepo;
+import com.revature.dto.Credentials;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,6 +38,8 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	
-
+	@Override
+	public AppUser login(Credentials creds) {
+		return null;
+	}
 }
