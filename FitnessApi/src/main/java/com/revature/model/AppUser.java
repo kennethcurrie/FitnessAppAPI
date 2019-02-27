@@ -31,6 +31,8 @@ public class AppUser {
 	@Column(name = "userid")
 	private int id;
 
+	
+
 	@Column(name = "username")
 	private String username;
 
@@ -200,5 +202,39 @@ public class AppUser {
 
 	public boolean checkPassword(String pass) {
 		return password.equals(MD5.getMD5(pass+salt));
+	}
+	
+	public AppUser(String username, String password, String fullName, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.fullName = fullName;
+		this.email = email;
+		
+		AccountType defaultType = new AccountType();
+		defaultType.setAccountTypeId(2);
+		
+		this.pictureUrl = "";
+		this.isPrivate = false;
+		this.accountType = defaultType;
+		this.followedUsers = new HashSet<AppUser>();
+		this.followedExercises = new HashSet<Exercise>();
+	}
+
+	public AppUser(int id, String username, String password, String salt, String fullName, String email,
+			String pictureUrl, boolean isPrivate, AccountType accountType, Set<AppUser> followedUsers,
+			Set<Exercise> followedExercises) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.salt = salt;
+		this.fullName = fullName;
+		this.email = email;
+		this.pictureUrl = pictureUrl;
+		this.isPrivate = isPrivate;
+		this.accountType = accountType;
+		this.followedUsers = followedUsers;
+		this.followedExercises = followedExercises;
 	}
 }
