@@ -1,12 +1,15 @@
 package com.revature.services;
 
 import java.util.List;
+import java.security.MessageDigest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.model.AppUser;
 import com.revature.repos.UserRepo;
+import com.revature.dto.Credentials;
+import com.revature.util.MD5;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,6 +52,18 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findById(id);
 	}
 	
-	
-
+	@Override
+	public AppUser login(Credentials creds) {
+		AppUser u = userRepo.findByUsername(creds.getUsername());
+		if (u==null) {
+			return null;
+		}else {
+			if(u.getPassword().equals(MD5.getMD5(creds.getPassword()+u.getSalt()))) {
+				return u;
+			}else {
+				return null;
+			}
+		}
+	}
 }
+
