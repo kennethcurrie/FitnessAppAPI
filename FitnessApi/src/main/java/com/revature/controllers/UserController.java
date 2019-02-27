@@ -104,6 +104,12 @@ public class UserController {
 		}	
 	}
 	
+	@GetMapping("rank/subscribers")
+	public List<AppUser> subscriberRankings() {
+		return userService.subscriberRankings();
+		
+	}
+	
 	@GetMapping("search/{searchString}")
 	public List<AppUser> findBySearchString(@PathVariable String searchString) {
 		return userService.search(searchString);	

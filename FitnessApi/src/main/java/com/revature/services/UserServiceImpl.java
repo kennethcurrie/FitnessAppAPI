@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,27 @@ public class UserServiceImpl implements UserService {
 				return null;
 			}
 		}
+	}
+	
+	@Override
+	public List<AppUser> subscriberRankings(){
+		List<AppUser> users = userRepo.findAll();
+		List<int[]> sub = new ArrayList<int[]>();
+		for(AppUser user:users) {
+			int[] I = {user.getId(), user.getSubscribers()};
+			sub.add(I);
+		}
+		sub.sort(Comparator.comparing(a -> a[1]));
+		users = new ArrayList<AppUser>();
+		for(int x=0; x<6; x++) {
+			users.add(userRepo.findById(sub.get(sub.size() - 1)[0]));
+			sub.remove(sub.get(sub.size() - 1));
+		}
+//		do{
+//			users.add(userRepo.findById(sub.get(sub.size() - 1)[0]));
+//			sub.remove(sub.get(sub.size() - 1));
+//		} while(sub.size()!=0);
+		return users;
 	}
 
 	@Override
