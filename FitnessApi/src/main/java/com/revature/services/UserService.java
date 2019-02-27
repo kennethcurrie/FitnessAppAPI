@@ -12,5 +12,7 @@ public interface UserService {
 	AppUser delete(AppUser user);
 	
 	List<AppUser>findAll();
+	AppUser findByUsername(String username);
+	AppUser findById(int id);
 	
 }

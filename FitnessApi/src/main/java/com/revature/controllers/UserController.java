@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.io.Console;
 
 //this is the router 
 // ** these are the available endpoints
@@ -70,22 +69,22 @@ public class UserController {
 
 	@GetMapping("{id}")
 	public ResponseEntity<AppUser> findById(@PathVariable int id) {
-		for (AppUser user : findAll()) {
-			if (user.getId() == id) {
-				return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
-			}
+		AppUser user = userService.findById(id);
+		if(user != null) {
+			return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
 	}
 	
 	@GetMapping("username/{username}")
 	public ResponseEntity<AppUser> findByUserName(@PathVariable String username) {
-		for (AppUser user : findAll()) {
-			if (user.getUserName().equals(username) ) {
-				return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
-			}
-		}
-		return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
+		AppUser user = userService.findByUsername(username);
+		if(user != null) {
+			return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
+		}	
 	}
 
 	
@@ -96,9 +95,8 @@ public class UserController {
 		System.out.println(user);
 		// by choice we dont want users to be able to update with post
 		// we should probably implement that here
-		AppUser u = userService.save(user);
-		System.out.println(u);
-		return u;
+		user.setSalt(""+user.hashCode());
+		return userService.save(user);
 	}
 	
 	@RequestMapping (value="/{id}/pics", method=RequestMethod.POST,  produces="text/plain", headers = "Accept=application/json")

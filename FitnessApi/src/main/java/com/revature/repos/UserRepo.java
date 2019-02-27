@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.revature.model.AppUser;
 
 public interface UserRepo extends JpaRepository<AppUser, Integer> {
+
+	AppUser findByUsername(String username);
+	AppUser findById(int id);
 }
