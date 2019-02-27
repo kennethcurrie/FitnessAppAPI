@@ -55,6 +55,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
 import com.revature.dto.Details;
+import com.revature.model.AccountType;
 import com.revature.model.AppUser;
 import com.revature.services.UserService;
 
@@ -111,12 +112,11 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(code=HttpStatus.CREATED)
-	public AppUser save(@RequestBody AppUser user) {
+	public AppUser save(@RequestBody Details userDetails) {
 		
-		System.out.println(user);
-		// by choice we dont want users to be able to update with post
-		// we should probably implement that here
+		AppUser user = new AppUser(userDetails.getUsername(), userDetails.getFullname(), userDetails.getPassword(), userDetails.getEmail());
 		user.setSalt(""+user.hashCode());
+		
 		return userService.save(user);
 	}
 	
