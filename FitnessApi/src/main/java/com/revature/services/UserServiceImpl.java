@@ -82,10 +82,15 @@ public class UserServiceImpl implements UserService {
 			System.out.println(user.getUsername()+" vs "+ searchString+"="+user.getUsername().toLowerCase().contains(searchString.toLowerCase()));
 			System.out.println(user.getFullName()+" vs "+ searchString+"="+user.getFullName().toLowerCase().contains(searchString.toLowerCase()));
 			System.out.println(user.getUsername().toLowerCase().contains(searchString.toLowerCase()) || user.getFullName().toLowerCase().contains(searchString.toLowerCase()));
-			if((
-				user.getUsername().toLowerCase().contains(searchString.toLowerCase()) ||
-				user.getFullName().toLowerCase().contains(searchString.toLowerCase())
-			)) {
+			if(
+				(
+					user.getUsername().toLowerCase().contains(searchString.toLowerCase()) ||
+					user.getFullName().toLowerCase().contains(searchString.toLowerCase())
+				) && (
+					!user.getIsPrivate()
+				)
+				
+			) {
 				returnUsers.add(user);
 			}else {
 				
