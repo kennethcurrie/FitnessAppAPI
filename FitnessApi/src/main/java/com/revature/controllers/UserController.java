@@ -88,6 +88,11 @@ public class UserController {
 			return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
 		}	
 	}
+	
+	@GetMapping("search/{searchString}")
+	public List<AppUser> findBySearchString(@PathVariable String searchString) {
+		return userService.search(searchString);	
+	}
 
 	
 	@PostMapping

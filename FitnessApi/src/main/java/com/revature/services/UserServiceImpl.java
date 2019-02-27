@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.security.MessageDigest;
 
@@ -64,6 +65,30 @@ public class UserServiceImpl implements UserService {
 				return null;
 			}
 		}
+	}
+
+	@Override
+	public List<AppUser> search(String searchString) {
+		List<AppUser> users = userRepo.findAll();
+		List<AppUser> returnUsers = new ArrayList<AppUser>();
+		searchString = searchString.trim();
+		System.out.println(users.getClass());
+		
+		for(AppUser user: users) {
+			System.out.println(user.getUsername()+" vs "+ searchString+"="+user.getUsername().toLowerCase().contains(searchString.toLowerCase()));
+			System.out.println(user.getFullName()+" vs "+ searchString+"="+user.getFullName().toLowerCase().contains(searchString.toLowerCase()));
+			System.out.println(user.getUsername().toLowerCase().contains(searchString.toLowerCase()) || user.getFullName().toLowerCase().contains(searchString.toLowerCase()));
+			if((
+				user.getUsername().toLowerCase().contains(searchString.toLowerCase()) ||
+				user.getFullName().toLowerCase().contains(searchString.toLowerCase())
+			)) {
+				returnUsers.add(user);
+			}else {
+				
+			}
+		}
+		
+		return returnUsers;
 	}
 }
 
