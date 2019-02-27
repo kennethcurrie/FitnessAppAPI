@@ -12,6 +12,7 @@ public interface UserService {
 	AppUser update(AppUser user);
 	AppUser delete(AppUser user);
 	AppUser login(Credentials creds);
+	List<AppUser> search(String searchString);
 	
 	List<AppUser>findAll();
 	AppUser findByUsername(String username);
