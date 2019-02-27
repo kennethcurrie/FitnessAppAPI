@@ -3,7 +3,7 @@ server:
  
 spring:
   application:
-    name: bear-api
+    name: fitness-api
 
   datasource:
     driverClassName: org.postgresql.Driver
