@@ -18,8 +18,7 @@ public class ExerciseLogServiceImpl implements ExerciseLogService {
 	
 	@Override
 	public ExerciseLog save(ExerciseLog history) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.history.save(history);
 	}
 
 	@Override

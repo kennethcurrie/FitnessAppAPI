@@ -33,15 +33,24 @@ public class ExerciseLog {
 	@Column(name = "occourred")
 	private Date occourred;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
+	//@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private AppUser user;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
+	//@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne
 	@JoinColumn(name = "exerciseid")
 	private Exercise exercise;
+
+	public Exercise getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
+	}
+
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "note")
@@ -54,14 +63,6 @@ public class ExerciseLog {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Exercise getExerciseId() {
-		return exercise;
-	}
-
-	public void setExerciseId(Exercise exerciseId) {
-		this.exercise = exerciseId;
 	}
 
 	public AppUser getUser() {
@@ -152,8 +153,10 @@ public class ExerciseLog {
 	
 	@Override
 	public String toString() {
-		return "Exerciselog [id=" + id + ", exercise=" + exercise + ", user=" + user + ", units=" + units
-				+ ", note=" + note + ", occourred=" + occourred + "]";
+		return "ExerciseLog [id=" + id + ", units=" + units + ", occourred=" + occourred + ", user=" + user
+				+ ", exercise=" + exercise + ", note=" + note + "]";
 	}
+
+
 
 }
