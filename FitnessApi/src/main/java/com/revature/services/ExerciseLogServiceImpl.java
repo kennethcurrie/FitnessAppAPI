@@ -52,7 +52,7 @@ public class ExerciseLogServiceImpl implements ExerciseLogService {
 
 	@Override
 	public List<Log> findAllByUserIdAndExerciseDescription(int id, String name) {
-		List<ExerciseLog> result = history.findAllByUserIdAndExerciseDescription(id, name);
+		List<ExerciseLog> result = history.findAllByUserIdAndExerciseDescription(id, name.toLowerCase());
 		List<Log> aggregated = new ArrayList<Log>();
 		for(ExerciseLog E:result) {
 			Log L = new Log(E);
