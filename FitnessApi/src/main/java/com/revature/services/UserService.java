@@ -14,6 +14,7 @@ public interface UserService {
 	AppUser delete(AppUser user);
 	AppUser login(Credentials creds);
 	List<AppUser> search(String searchString);
+	List<AppUser> subscriberRankings();
 	
 	List<AppUser>findAll();
 	AppUser findByUsername(String username);

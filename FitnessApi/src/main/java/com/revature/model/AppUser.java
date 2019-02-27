@@ -64,6 +64,14 @@ public class AppUser {
 	private Set<AppUser> followedUsers = new HashSet<>();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "accountsubscription", joinColumns = @JoinColumn(name = "subscribeeid"), inverseJoinColumns = @JoinColumn(name = "subscriberid"))
+	private Set<AppUser> followers = new HashSet<>();
+	
+	public int getSubscribers() {
+		return followers.size();
+	}
+	
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "exercisesubscription", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "exerciseid"))
 	private Set<Exercise> followedExercises = new HashSet<>();
 	
