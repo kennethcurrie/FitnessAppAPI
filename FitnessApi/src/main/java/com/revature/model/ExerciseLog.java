@@ -33,12 +33,12 @@ public class ExerciseLog {
 	@Column(name = "occourred")
 	private Date occourred;
 	
-	//@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private AppUser user;
 	
-	//@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne
 	@JoinColumn(name = "exerciseid")
 	private Exercise exercise;

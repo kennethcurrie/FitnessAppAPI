@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.dto.Log;
 import com.revature.model.AppUser;
 import com.revature.model.ExerciseLog;
 import com.revature.services.ExerciseLogService;
@@ -39,7 +40,7 @@ public class HistoryController {
 	}
 	
 	@GetMapping("user/{id}/exercise/{exercise}")
-	public List<ExerciseLog> findAllByUserIdAndExerciseDescription(@PathVariable int id, @PathVariable String exercise) {
+	public List<Log> findAllByUserIdAndExerciseDescription(@PathVariable int id, @PathVariable String exercise) {
 		return history.findAllByUserIdAndExerciseDescription(id, exercise);
 	}
 	
