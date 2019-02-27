@@ -13,5 +13,4 @@ public interface UserRepo extends JpaRepository<AppUser, Integer> {
 	AppUser findByUsernameAndPassword(String username, String password);
 	AppUser findByUsername(String username);
 	AppUser findById(int id);
-//	AppUser merge(AppUser user);
 }

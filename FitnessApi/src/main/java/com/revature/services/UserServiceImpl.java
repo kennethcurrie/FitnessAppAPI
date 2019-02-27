@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.revature.model.AppUser;
 import com.revature.repos.UserRepo;
 import com.revature.dto.Credentials;
+import com.revature.dto.Details;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,15 +23,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public AppUser update(int id, String username, String password, String fullname, String email, boolean privateprofile) {
-		AppUser user = userRepo.findById(id);
-		user.setUsername(username);
-		user.setPassword(password);
-		user.setFullName(fullname);
-		user.setEmail(email);
-		user.setPrivate(privateprofile);
-//		return userRepo.merge(user);
-		return user;
+	public AppUser update(Details deets) {
+		AppUser user = userRepo.findByUsername(deets.getUsername());
+		user.setPassword(deets.getPassword());
+		user.setFullName(deets.getFullname());
+		user.setEmail(deets.getEmail());
+		user.setPrivate(deets.isPrivateprofile());
+		return userRepo.save(user);
 	}
 
 	@Override

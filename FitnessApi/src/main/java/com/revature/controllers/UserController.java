@@ -54,6 +54,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
+import com.revature.dto.Details;
 import com.revature.model.AppUser;
 import com.revature.services.UserService;
 
@@ -80,9 +81,11 @@ public class UserController {
 		}
 	}
 	
-	@PatchMapping("{id}")
-	public ResponseEntity<AppUser> updateUser(@PathVariable int id, @RequestBody String username, @RequestBody String password, @RequestBody String fullname, @RequestBody String email, @RequestBody boolean privateprofile) {
-		AppUser user = userService.update(id, username, password, fullname, email, privateprofile);
+	@PatchMapping("update")
+	public ResponseEntity<AppUser> updateUser(@RequestBody Details deets) {
+		System.out.println("username, password, fullname, email, privateprofile");
+		System.out.println(deets.getUsername()+" "+deets.getPassword()+" "+deets.getFullname()+" "+deets.getEmail()+" "+deets.isPrivateprofile());
+		AppUser user = userService.update(deets);
 		if(user != null) {
 			return new ResponseEntity<AppUser>(user, HttpStatus.ACCEPTED);
 		} else {
