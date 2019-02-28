@@ -117,10 +117,10 @@ public class UserController {
 
 	
 	@PostMapping
-	@ResponseStatus(code=HttpStatus.CREATED)
+	@ResponseStatus(code=HttpStatus.CREATED) 
 	public AppUser save(@RequestBody Details userDetails) {
 		
-		AppUser user = new AppUser(userDetails.getUsername(), userDetails.getFullname(), userDetails.getPassword(), userDetails.getEmail());
+		AppUser user = new AppUser(userDetails.getUsername(), userDetails.getPassword(), userDetails.getFullname(), userDetails.getEmail());
 		user.setSalt(""+user.hashCode());
 		
 		return userService.save(user);
