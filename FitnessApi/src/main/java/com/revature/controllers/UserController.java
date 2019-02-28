@@ -104,6 +104,22 @@ public class UserController {
 		}	
 	}
 	
+	@PatchMapping("subscribe/{Subscriber}/{Subscribee}")
+	public AppUser SubscribeToUser(@PathVariable String Subscriber, @PathVariable String Subscribee) {
+		AppUser U = userService.findByUsername(Subscriber);
+		U.addSubscription(userService.findByUsername(Subscribee));
+		userService.save(U);
+		return U;
+	}
+	
+	@PatchMapping("unsubscribe/{Subscriber}/{Subscribee}")
+	public AppUser UnsubscribeToUser(@PathVariable String Subscriber, @PathVariable String Subscribee) {
+		AppUser U = userService.findByUsername(Subscriber);
+		U.removeSubscription(userService.findByUsername(Subscribee));
+		userService.save(U);
+		return U;
+	}
+	
 	@GetMapping("rank/subscribers")
 	public List<AppUser> subscriberRankings() {
 		return userService.subscriberRankings();
