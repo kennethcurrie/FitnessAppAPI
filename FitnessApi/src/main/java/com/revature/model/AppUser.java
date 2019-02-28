@@ -80,6 +80,14 @@ public class AppUser {
 	public AppUser() {
 		super();
 	}
+	
+	public void addSubscription(AppUser U) {
+		followedUsers.add(U);
+	}
+	
+	public void removeSubscription(AppUser U) {
+		followedUsers.remove(U);
+	}
 
 	public int getId() {
 		return id;
