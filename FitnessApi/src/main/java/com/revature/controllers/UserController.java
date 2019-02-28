@@ -121,7 +121,6 @@ public class UserController {
 	public AppUser save(@RequestBody Details userDetails) {
 		
 		AppUser user = new AppUser(userDetails.getUsername(), userDetails.getPassword(), userDetails.getFullname(), userDetails.getEmail());
-		user.setSalt(""+user.hashCode());
 		
 		return userService.save(user);
 	}
