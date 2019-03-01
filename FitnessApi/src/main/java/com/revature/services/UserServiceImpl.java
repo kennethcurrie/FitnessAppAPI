@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void delete(String username) {
+		userRepo.deleteByUsername(username);
+	}
+
+	@Override
 	public List<AppUser> findAll() {
 		// TODO Auto-generated method stub
 		return userRepo.findAll();

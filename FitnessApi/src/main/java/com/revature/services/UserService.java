@@ -12,6 +12,7 @@ public interface UserService {
 	AppUser save(AppUser user);
 	AppUser update(Details deets);
 	AppUser delete(AppUser user);
+	void delete(String username);
 	AppUser login(Credentials creds);
 	List<AppUser> search(String searchString);
 	List<AppUser> subscriberRankings();

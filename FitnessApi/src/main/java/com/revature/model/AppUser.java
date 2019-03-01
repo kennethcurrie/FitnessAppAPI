@@ -80,6 +80,14 @@ public class AppUser {
 	public AppUser() {
 		super();
 	}
+	
+	public void addSubscription(AppUser U) {
+		followedUsers.add(U);
+	}
+	
+	public void removeSubscription(AppUser U) {
+		followedUsers.remove(U);
+	}
 
 	public int getId() {
 		return id;
@@ -215,7 +223,10 @@ public class AppUser {
 	public AppUser(String username, String password, String fullName, String email) {
 		super();
 		this.username = username;
-		this.password = password;
+		this.salt = MD5.getMD5(username + "goop");
+		this.password = MD5.getMD5(password + this.salt);
+		System.out.println(this.salt);
+		System.out.println(this.password);
 		this.fullName = fullName;
 		this.email = email;
 		
@@ -229,14 +240,14 @@ public class AppUser {
 		this.followedExercises = new HashSet<Exercise>();
 	}
 
-	public AppUser(int id, String username, String password, String salt, String fullName, String email,
+	public AppUser(int id, String username, String password, String fullName, String email,
 			String pictureUrl, boolean isPrivate, AccountType accountType, Set<AppUser> followedUsers,
 			Set<Exercise> followedExercises) {
 		super();
 		this.id = id;
 		this.username = username;
-		this.password = password;
-		this.salt = salt;
+		this.salt = MD5.getMD5(username + "goop");
+		this.password = MD5.getMD5(password + this.salt);
 		this.fullName = fullName;
 		this.email = email;
 		this.pictureUrl = pictureUrl;
