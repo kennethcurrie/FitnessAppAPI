@@ -26,7 +26,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AppUser update(Details deets) {
 		AppUser user = userRepo.findByUsername(deets.getUsername());
-		user.setPassword(deets.getPassword());
+		if(deets.getPassword()!="") {
+			user.setPassword(deets.getPassword());
+		}
 		user.setFullName(deets.getFullname());
 		user.setEmail(deets.getEmail());
 		user.setPrivate(deets.isPrivateprofile());
